@@ -606,13 +606,8 @@ void setup()
 
 void loop() 
 { 
-
-//Buff = "F5RF6LF2RF3LF5RF3LF5";
-
-//Buff = "F2LF3LF2LF3";
-
    if(fp)
-  {
+   {
     if(Serial.available()>0)
    {
      Buff = Serial.readString();
@@ -622,27 +617,31 @@ void loop()
     if(command == 'F')
     {
       i++;
-      grid = (int(Buff.charAt(i))) -48; // for ASCII conversion
-     }
+      grid = (int(Buff.charAt(i))) -48; 
+      // for ASCII conversion
+    }
    }
    
    else
-   if(Serial.available()>0)
-   {
-     command = Serial.read();
-   }
+    if(Serial.available()>0)
+      command = Serial.read();
  
     switch(command)
     {
-      case 'F': if(!fp)moveForward(1);else FastForward(grid); break;
-    //case 'B': turnLeft(180);moveForward(22);turnLeft(180); break;
-      case 'L': turnLeft(90); break; //82
-      case 'R': if(!fp)turnRight(90);else turnRight(91);break; //87
-      case 'U': turnLeft(180);break;
-      case 'C': calibrate();break;
-      case 'S': stopwheels();break;
-      case 'd': sensor_distance(); finish = false;command = '\0'; break;
-      case 'X': fp = true;finish = false; command = '\0'; break; 
+      case 'F': 
+        if(!fp) moveForward(1); 
+        else FastForward(grid); break;
+      case 'L': turnLeft(90); break;
+      case 'R': turnRight(90); break;
+      case 'U': turnLeft(180); break;
+      case 'C': calibrate(); break;
+      case 'S': stopwheels(); break;
+      case 'd': 
+        sensor_distance(); finish = false; 
+        command = '\0'; break;
+      case 'X': 
+        fp = true; finish = false; 
+        command = '\0'; break; 
       default: break;
     }
 
